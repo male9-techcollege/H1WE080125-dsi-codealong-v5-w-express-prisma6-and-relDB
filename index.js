@@ -27,6 +27,7 @@ import { carRouter } from "./src/routes/carRoutes.js";
 import { brandRouterByMariePierreLessard } from "./src/routes/brandRoutes.js";
 import { categoryRouterByMariePierreLessard } from "./src/routes/categoryRoutes.js";
 import { userRouterByMariePierreLessard } from "./src/routes/userRoutes.js";
+import { loginRouterByMariePierreLessard } from "./src/routes/loginRoutes.js";
 import { legalPagesRouterByMariePierreLessard } from "./src/routes/legalRoutes.js";
 import { dealershipRouterByMariePierreLessard } from "./src/routes/dealershipRoutes.js";
 import { errorRouterByMariePierreLessard } from "./src/routes/errorRoutes.js";
@@ -66,7 +67,7 @@ serverAppByMariePierreLessard.use(express.urlencoded({ extended: true }));
    "/" is a synonym for root. */
 /* "Ved at bruge metoden get i Express kan vi sætte en listener op for hver enkelt url og definere hvilket svar, serveren skal give de enkelte forespørgsler. Dermed kan vi nemmere håndtere hvilke sider brugerne må og kan se og omvendt. Det kaldes også routing i moderne fagsprog."
 https://moodle.techcollege.dk/course/section.php?id=282537 */
-serverAppByMariePierreLessard.get("/", (request, response) => {
+serverAppByMariePierreLessard.get("/api", (request, response) => {
     /* The following only gets printed to the console or displayed in browser when serverAppByMariePierreLessard is called.
     To call serverAppByMariePierreLessard, first I have to type nodemon in the console, and then I use CTRL+click on the URL in the terminal. */
     response.send("Velkommen til Everride!"); //To see text in browser
@@ -77,17 +78,18 @@ serverAppByMariePierreLessard.get("/", (request, response) => {
 /* On large sites, it is advisable to create JS files for endpoints (routes) in each section, otherwise the list gets very long. 
 The following says that carRouter is called at the endpoint /cars. 
 Middleware, like carRouter, is code that gets implemented between "the incoming request and the outgoing response" acc. to "Express Crash Course" by Traversy Media on YouTube at https://m.youtube.com/watch?v=CnH3kAXSrmU */
-serverAppByMariePierreLessard.use("/cars", carRouter);
+serverAppByMariePierreLessard.use("/api/cars", carRouter);
 /* Additional exercise in v4 */
-serverAppByMariePierreLessard.use("/brands", brandRouterByMariePierreLessard);
-serverAppByMariePierreLessard.use("/categories", categoryRouterByMariePierreLessard);
+serverAppByMariePierreLessard.use("/api/brands", brandRouterByMariePierreLessard);
+serverAppByMariePierreLessard.use("/api/categories", categoryRouterByMariePierreLessard);
 /* Exercise in v5 */
-serverAppByMariePierreLessard.use("/users", userRouterByMariePierreLessard);
+serverAppByMariePierreLessard.use("/api/users", userRouterByMariePierreLessard);
+serverAppByMariePierreLessard.use("/api/login", loginRouterByMariePierreLessard);
 
 /* EXERCISE after v3 */
-serverAppByMariePierreLessard.use("/legal", legalPagesRouterByMariePierreLessard);
-serverAppByMariePierreLessard.use("/dealerships", dealershipRouterByMariePierreLessard);
-serverAppByMariePierreLessard.use("/errors", errorRouterByMariePierreLessard);
+serverAppByMariePierreLessard.use("/api/legal", legalPagesRouterByMariePierreLessard);
+serverAppByMariePierreLessard.use("/api/dealerships", dealershipRouterByMariePierreLessard);
+serverAppByMariePierreLessard.use("/api/errors", errorRouterByMariePierreLessard);
 
 /* EXERCISE after v2
 Du må selv bestemme hvilke sider du vil oprette listeners til 
@@ -98,43 +100,43 @@ Se eksempel på
 https://github.com/expressjs/express/blob/master/examples/error-pages/index.js
 (Fundet via https://expressjs.com/en/starter/examples.html)
 
-serverAppByMariePierreLessard.get("/vehicles", (request, response) => {
+serverAppByMariePierreLessard.get("/api/vehicles", (request, response) => {
     response.send("Dette er siden Biler til salg...");
 });
 
-serverAppByMariePierreLessard.get("/dealerships", (request, response) => {
+serverAppByMariePierreLessard.get("/api/dealerships", (request, response) => {
     response.send("Dette er siden Afdelinger...");
 });
 
-serverAppByMariePierreLessard.get("/about", (request, response) => {
+serverAppByMariePierreLessard.get("/api/about", (request, response) => {
     response.send("Dette er siden Om Everride...");
 });
 
-serverAppByMariePierreLessard.get("/contact", (request, response) => {
+serverAppByMariePierreLessard.get("/api/contact", (request, response) => {
     response.send("Dette er siden Kontakt os...");
 });
 
-serverAppByMariePierreLessard.get("/terms", (request, response) => {
+serverAppByMariePierreLessard.get("/api/terms", (request, response) => {
     response.send("Dette er siden Handelsbetingelser...");
 });
 
-serverAppByMariePierreLessard.get("/privacy", (request, response) => {
+serverAppByMariePierreLessard.get("/api/privacy", (request, response) => {
     response.send("Dette er siden Privatlivspolitik...");
 });
 
-serverAppByMariePierreLessard.get("/payment", (request, response) => {
+serverAppByMariePierreLessard.get("/api/payment", (request, response) => {
     response.send("Dette er siden Betalingsmidler...");
 });
 
-serverAppByMariePierreLessard.get("/delivery", (request, response) => {
+serverAppByMariePierreLessard.get("/api/delivery", (request, response) => {
     response.send("Dette er siden Levering...");
 });
 
-serverAppByMariePierreLessard.get("/returns", (request, response) => {
+serverAppByMariePierreLessard.get("/api/returns", (request, response) => {
     response.send("Dette er siden Retur...");
 });
 
-serverAppByMariePierreLessard.get("/warranty", (request, response) => {
+serverAppByMariePierreLessard.get("/api/warranty", (request, response) => {
     response.send("Dette er siden Garanti og service...");
 });
 */
