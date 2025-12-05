@@ -1,7 +1,7 @@
 /* Maybe TO DO after doing the mandatory reading and exercises:
 in the experiments of v4, it was fine to have a slightly illogical set of fields.
 In a relational database, it would make more sense to have dates of update in a different table since there is no real update at creation time.
-Also, I could create additional tables for reused fields (make, model, etc., even fuelType).
+Also, I could create additional tables for reused fields (make, model, etc.).
 
 IMPORTANT note about idempotency:
 HTTP-request methods such as put are not inherently idempotent. Programmers are asked to make these requests idempotent 
