@@ -1,5 +1,3 @@
-/* TO DO edit, see codealong */
-
 import { prisma } from "../../prisma.js";
 import bcrypt from "bcrypt";
 
