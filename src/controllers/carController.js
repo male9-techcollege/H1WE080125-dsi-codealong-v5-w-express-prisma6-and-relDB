@@ -32,10 +32,10 @@ export const createRecordByMariePierreLessard = async (req, res) => {
     */
     /* The following works after entering the field names under Body > x-www-form-urlencoded in Postman (otherwise, the properties are said to be undefined since there is no request from an actual form):  */
     /* My exercises in V4 did NOT establish relationships between tables. I am not keeping that version in comments, just in a separate folder. */
-    const { category_id, brand_id, make, model, year, trimLevel, generation, price, fuelType, used, createdOn, updatedOn } = req.body;
+    const { category_id, brand_id, make, model, year, trimLevel, generation, price, used, createdOn, updatedOn } = req.body;
     //console.log(category);
 
-    if (!category_id || !brand_id || !make || !model || !year || !trimLevel || !generation || !price || !fuelType || !used || !createdOn || !updatedOn) {
+    if (!category_id || !brand_id || !make || !model || !year || !trimLevel || !generation || !price || !used || !createdOn || !updatedOn) {
         return res.status(400).json({ error: "Alle felter skal udfyldes." });
     };
 
@@ -58,7 +58,6 @@ export const createRecordByMariePierreLessard = async (req, res) => {
                 trimLevel,
                 generation,
                 price: Number(price),
-                fuelType,
                 used: Boolean(used),
                 createdOn: new Date(createdOn),
                 /* Normalisation rules (normal forms)
@@ -100,19 +99,18 @@ export const createRecordByMariePierreLessard = async (req, res) => {
 
         /* I thought of the following myself instead of data.id as recommended on Stackoverflow. */
         const dataWithIdByMariePierreLessard = {
-           id: data.id,
-           category_id,
-           brand_id,
-           make,
-           model,
-           year,
-           trimLevel,
-           generation,
-           price,
-           fuelType,
-           used,
-           createdOn,
-           updatedOn
+            id: data.id,
+            category_id,
+            brand_id,
+            make,
+            model,
+            year,
+            trimLevel,
+            generation,
+            price,
+            used,
+            createdOn,
+            updatedOn
        };
        console.log(dataWithIdByMariePierreLessard); //It works.
        return res.status(201).json(dataWithIdByMariePierreLessard);
@@ -159,7 +157,7 @@ export const getRecordsByMariePierreLessard = async (req, res) => {
                 trimLevel: true,
                 generation: true,
                 price: true,
-                fuelType: true,
+                carFuelRels: true,
                 used: true
                 /* I left out createdOn and updatedOn. */
             },
@@ -217,7 +215,7 @@ export const getRecordByMariePierreLessard = async (req, res) => {
                 trimLevel: true,
                 generation: true,
                 price: true,
-                fuelType: true,
+                carFuelRels: true,
                 used: true
                 /* I left out createdOn and updatedOn. */
             }
@@ -234,13 +232,13 @@ export const updateRecordByMariePierreLessard = async (req, res) => {
     // Logger form body: console.log(req.body)
 
     const id = Number(req.params.id);
-    const { category_id, brand_id, make, model, year, trimLevel, generation, price, fuelType, used, createdOn, updatedOn } = req.body; // Deconstruerer form body objektet
+    const { category_id, brand_id, make, model, year, trimLevel, generation, price, used, createdOn, updatedOn } = req.body; // Deconstruerer form body objektet
 
     if (!id) {
         return res.status(400).json({ error: 'Id skal have en gyldig værdi' });
     };
 
-    if (!category_id || !brand_id || !make || !model || !year || !trimLevel || !generation || !price || !fuelType || !used || !createdOn || !updatedOn) {
+    if (!category_id || !brand_id || !make || !model || !year || !trimLevel || !generation || !price || !used || !createdOn || !updatedOn) {
         return res.status(400).json({ error: 'Alle felter skal udfyldes' });
     };
 
@@ -256,7 +254,6 @@ export const updateRecordByMariePierreLessard = async (req, res) => {
                 trimLevel,
                 generation,
                 price: Number(price),
-                fuelType,
                 used: Boolean(used),
                 createdOn: new Date(createdOn),
                 updatedOn: new Date(updatedOn)

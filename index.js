@@ -1,3 +1,28 @@
+/* NOTES ABOUT CONTENTS OF PACKAGE.JSON 
+
+About:
+"scripts": {
+    "start": "node --watch index.js",
+    "dev": "node --watch --watch-preserve-output index.js",
+  },
+
+To start the server and clear the terminal, enter "npm start" or "npm run start" in the terminal. This command, along with script above, does the same thing as entering "nodemon" in the terminal. 
+The "nodemon" command still works (and it contains less characters; faster to type).
+Source for "npm start": one of the videos by Traversy Media that I watched on YouTube in the last 2-3 weeks.
+To start the server without clearing the terminal, enter "npm run dev".
+
+"--watch (...)
+Starts Node.js in watch mode. When in watch mode, changes in the watched files cause the Node.js process to restart. By default, watch mode will watch the entry point and any required or imported module. (...)
+--watch-preserve-output (...)
+Disable the clearing of the console when watch mode restarts the process."
+https://nodejs.org/docs/latest/api/cli.html
+
+TypeScript only synxtax:
+"prisma:seed": "prisma db seed"
+"prisma:seed" does not work, probably because I don't have .ts files. Without TS, the command to execute the code in seed.js is:
+npx prisma db seed
+*/
+
 /* Teacher's code from codealongs can be found at https://github.com/Webudvikler-TechCollege/H1WE080125-dsi-codealong */
 
 /* See additional useful notes in 1st version codealong */
@@ -26,8 +51,11 @@ import dotenv from "dotenv";
 import { carRouter } from "./src/routes/carRoutes.js";
 import { brandRouterByMariePierreLessard } from "./src/routes/brandRoutes.js";
 import { categoryRouterByMariePierreLessard } from "./src/routes/categoryRoutes.js";
+import { fuelRouterByMariePierreLessard } from "./src/routes/fuelRoutes.js";
+import { cfrelRouterByMariePierreLessard } from "./src/routes/cfrelRoutes.js";
 import { userRouterByMariePierreLessard } from "./src/routes/userRoutes.js";
 import { loginRouterByMariePierreLessard } from "./src/routes/loginRoutes.js";
+import { authRouterByMariePierreLessard } from "./src/routes/authRoutes.js";
 import { legalPagesRouterByMariePierreLessard } from "./src/routes/legalRoutes.js";
 import { dealershipRouterByMariePierreLessard } from "./src/routes/dealershipRoutes.js";
 import { errorRouterByMariePierreLessard } from "./src/routes/errorRoutes.js";
@@ -67,6 +95,8 @@ serverAppByMariePierreLessard.use(express.urlencoded({ extended: true }));
    "/" is a synonym for root. */
 /* "Ved at bruge metoden get i Express kan vi sætte en listener op for hver enkelt url og definere hvilket svar, serveren skal give de enkelte forespørgsler. Dermed kan vi nemmere håndtere hvilke sider brugerne må og kan se og omvendt. Det kaldes også routing i moderne fagsprog."
 https://moodle.techcollege.dk/course/section.php?id=282537 */
+/* Troubleshooting: 
+now that I added api to the root "/", the index file is no longer found at the address http://localhost:${port} */
 serverAppByMariePierreLessard.get("/api", (request, response) => {
     /* The following only gets printed to the console or displayed in browser when serverAppByMariePierreLessard is called.
     To call serverAppByMariePierreLessard, first I have to type nodemon in the console, and then I use CTRL+click on the URL in the terminal. */
@@ -83,8 +113,11 @@ serverAppByMariePierreLessard.use("/api/cars", carRouter);
 serverAppByMariePierreLessard.use("/api/brands", brandRouterByMariePierreLessard);
 serverAppByMariePierreLessard.use("/api/categories", categoryRouterByMariePierreLessard);
 /* Exercise in v5 */
+serverAppByMariePierreLessard.use("/api/fuels", fuelRouterByMariePierreLessard);
+serverAppByMariePierreLessard.use("/api/cfrel", cfrelRouterByMariePierreLessard);
 serverAppByMariePierreLessard.use("/api/users", userRouterByMariePierreLessard);
 serverAppByMariePierreLessard.use("/api/login", loginRouterByMariePierreLessard);
+serverAppByMariePierreLessard.use("/api/auth", authRouterByMariePierreLessard);
 
 /* EXERCISE after v3 */
 serverAppByMariePierreLessard.use("/api/legal", legalPagesRouterByMariePierreLessard);
@@ -151,7 +184,7 @@ when I used CTRL+click on link in the console.
 http://localhost.${port}
 */
 serverAppByMariePierreLessard.listen(port, () => {
-    console.log(`Express-server kører på http://localhost:${port}`);
+    console.log(`Express-server kører på http://localhost:${port}/api`);
 });
 
 
