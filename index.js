@@ -48,7 +48,7 @@ The .env file is useful for credentials.
 "Dotenv er et npm-bibliotek, der gør det muligt at indlæse miljøvariabler fra en .env-fil til Node.js-applikationer."
 Source: Moodle, page entitled "DOTENV biblioteket" */
 import dotenv from "dotenv";
-import { carRouter } from "./src/routes/carRoutes.js";
+import { carRouterByMariePierreLessard } from "./src/routes/carRoutes.js";
 import { brandRouterByMariePierreLessard } from "./src/routes/brandRoutes.js";
 import { categoryRouterByMariePierreLessard } from "./src/routes/categoryRoutes.js";
 import { fuelRouterByMariePierreLessard } from "./src/routes/fuelRoutes.js";
@@ -108,7 +108,7 @@ serverAppByMariePierreLessard.get("/api", (request, response) => {
 /* On large sites, it is advisable to create JS files for endpoints (routes) in each section, otherwise the list gets very long. 
 The following says that carRouter is called at the endpoint /cars. 
 Middleware, like carRouter, is code that gets implemented between "the incoming request and the outgoing response" acc. to "Express Crash Course" by Traversy Media on YouTube at https://m.youtube.com/watch?v=CnH3kAXSrmU */
-serverAppByMariePierreLessard.use("/api/cars", carRouter);
+serverAppByMariePierreLessard.use("/api/cars", carRouterByMariePierreLessard);
 /* Additional exercise in v4 */
 serverAppByMariePierreLessard.use("/api/brands", brandRouterByMariePierreLessard);
 serverAppByMariePierreLessard.use("/api/categories", categoryRouterByMariePierreLessard);

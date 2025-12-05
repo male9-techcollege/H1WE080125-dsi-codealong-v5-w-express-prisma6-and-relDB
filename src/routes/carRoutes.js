@@ -44,6 +44,6 @@ router.delete("/:id", deleteRecord);
 /* Function expression "router" exported as an alias (carRouter). 
 Other version on Moodle:
 export const carRouter = router */
-export { router as carRouter };
+export { router as carRouterByMariePierreLessard };
 
 /* Copyright 2025, Marie-Pierre Lessard */
