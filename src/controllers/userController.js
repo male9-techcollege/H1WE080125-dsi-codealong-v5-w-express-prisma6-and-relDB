@@ -80,7 +80,7 @@ export const getRecordsByMariePierreLessard = async (req, res) => {
                 lastname: "asc"
             }
         });
-        console.log("The car controller is returning: ", data);
+        console.log("The user controller is returning: ", data);
         res.json(data);
     } catch (error) {
         console.error(error);
